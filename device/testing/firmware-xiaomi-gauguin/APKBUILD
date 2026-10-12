@@ -1,0 +1,46 @@
+maintainer="Matteo Cuneo <mcuneo09@gmail.com>"
+pkgname=firmware-xiaomi-gauguin
+pkgver=20261012
+pkgrel=0
+pkgdesc="Firmware for Xiaomi Mi 10T Lite"
+subpackages="
+	$pkgname-adreno
+	"
+url="https://github.com/UsrBinLuna/GauguinFirmware"
+arch="aarch64"
+license="proprietary"
+makedepends="pil-squasher"
+options="!check !strip !archcheck !tracedeps textrels pmb:cross-native"
+_commit="4ed174c81874ec9b91afbdc8acf18ba91bec789d"
+source="https://github.com/UsrBinLuna/GauguinFirmware/archive/$_commit/FP4-firmware-$_commit.tar.gz"
+builddir="$srcdir/GauguinFirmware-$_commit"
+
+build() {
+	for i in *.mdt; do
+		pil-squasher "$(basename "$i" .mdt)".mbn "$i"
+	done
+}
+
+package() {
+	# parent package is empty
+	mkdir -p "$pkgdir"
+}
+
+adreno() {
+	pkgdesc="Xiaomi Mi 10T Lite adreno firmware"
+
+	# TODO: replace with firmware-qcom-adreno-a619 when released to linux-firmware.
+	# The parent device package currently depends on a630-sqe
+	install -Dm644 "$builddir"/a619_gmu.bin -t \
+		"$subpkgdir/usr/lib/firmware/qcom/"
+
+    install -Dm644 "$builddir"/a630_sqe.fw -t \
+        "$subpkgdir/usr/lib/firmware/qcom/"
+
+	install -Dm644 "$builddir"/a615_zap.mbn -t \
+		"$subpkgdir/usr/lib/firmware/qcom/sm7225/gauguin/"
+}
+
+sha512sums="
+d484e339180efc680f7c9b3308e2df53e4773d1a6f38172772b114bf465b89298e734b9cab8aae5b212fa5e9e174f416caca3bb89c31b5bffe401eeabcaa1406  FP4-firmware-4ed174c81874ec9b91afbdc8acf18ba91bec789d.tar.gz
+"

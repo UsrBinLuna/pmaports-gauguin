@@ -25,5 +25,6 @@ deviceinfo_flash_offset_kernel="0x00008000"
 deviceinfo_flash_offset_ramdisk="0x01000000"
 deviceinfo_flash_offset_second="0x00000000"
 deviceinfo_flash_offset_tags="0x00000100"
+deviceinfo_kernel_cmdline="arm-smmu.disable_bypass=0 dd.dyndbg=+p initcall_debug ignore_loglevel clk_ignore_unused pd_ignore_unused regulator_ignore_unused console=tty0 panic=0 PMOS_NO_OUTPUT_REDIRECT pmos.nosplash"
 
 deviceinfo_rootfs_image_sector_size="4096"

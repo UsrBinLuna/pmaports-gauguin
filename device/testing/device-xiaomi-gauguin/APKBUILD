@@ -9,6 +9,8 @@ license="MIT"
 arch="aarch64"
 options="!check !archcheck"
 depends="
+	firmware-qcom-adreno-a630-sqe
+	firmware-xiaomi-gauguin-adreno
 	linux-postmarketos-qcom-sm6350
 	mkbootimg
 	postmarketos-base
@@ -27,5 +29,5 @@ package() {
 }
 
 sha512sums="
-3720c0dff9aee47e0a57739d90e66d47ef27761ee4706aa171fc426c2639bbbf26c89d6290194ad55fc84467e46c4a91b48d137c55e288795b4e1e39643f6da7  deviceinfo
+95aba43f44fad45aed706293ccbc3fba3dfda4946446460ac60fe36e33867447fd34feb0615be25703c69cb6f915fc7247893d963c6b091da79115e44a694b70  deviceinfo
 "
